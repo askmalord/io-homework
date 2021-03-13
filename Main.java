@@ -118,7 +118,7 @@ public class Main {
             }
         }
         // проверка работоспособности кода 3 задачи
-        openZip(zipFileName, "C:\\Users\\Maksim\\IdeaProjects\\ioHomework\\src\\Games\\savegames"); // распаковка архива
+        openZip(zipFileName); // распаковка архива
         GameProgress gameProgress = openProgress(fileName2);
         System.out.println(gameProgress);
     }
@@ -165,14 +165,13 @@ public class Main {
 
     }
     // распаковка zip-архива
-    public static void openZip(String zipFileName, String unzipFileName) {
+    public static void openZip(String zipFileName) {
         try(FileInputStream fileInputStream = new FileInputStream(zipFileName);
             ZipInputStream zipInputStream = new ZipInputStream(fileInputStream)) {
             ZipEntry entry;
             String fileName;
             while ((entry = zipInputStream.getNextEntry()) != null) {
                 fileName = entry.getName();
-                System.out.println(fileName);
                 FileOutputStream outputStream = new FileOutputStream(fileName);
                 for (int c = zipInputStream.read(); c != -1 ; c = zipInputStream.read()) {
                     outputStream.write(c);
